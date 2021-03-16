@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public final class UtilTest {
 
@@ -177,6 +178,13 @@ public final class UtilTest {
     if (Util.operatingSystem == 'w') {
       assertFalse(Util.SCRIPT_START_BASE64.endsWith("="));
     }
+  }
+
+  // In the cases when there are some problems with interoperability with Powershell, Util.getWinDirs
+  // could return null. See, for example, https://github.com/dirs-dev/directories-jvm/issues/47.
+  @Test
+  public void testWinDirsReturnsNotNull() {
+    assertNotNull(Util.getWinDirs("FDD39AD0-238F-46AF-ADB4-6C85480369C7")[0]);
   }
 
 }
